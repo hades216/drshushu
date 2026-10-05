@@ -106,7 +106,7 @@ export function App() {
   return (
     <div
       ref={mainContainerRef}
-      className="relative min-h-screen bg-white text-neutral-900 font-sans selection:bg-[#FDBA74] selection:text-neutral-900 overflow-x-hidden"
+      className="relative min-h-screen bg-[#181716] text-neutral-900 font-sans selection:bg-[#FDBA74] selection:text-neutral-900 overflow-x-hidden"
     >
       {/* Premium GSAP-Powered PillNav with Rising Background Animation & Rotating Logo */}
       <PillNav

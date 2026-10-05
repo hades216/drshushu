@@ -11,6 +11,7 @@ interface MrsFrenchDoctorBioProps {
 
 export const MrsFrenchDoctorBio: React.FC<MrsFrenchDoctorBioProps> = ({ onBookClick }) => {
   const [showFullBio, setShowFullBio] = useState(false);
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
 
   return (
     <section id="about" className="relative bg-white py-16 sm:py-20 lg:py-24 border-b border-[#EFECE6] overflow-hidden snap-section-always">
@@ -72,7 +73,11 @@ export const MrsFrenchDoctorBio: React.FC<MrsFrenchDoctorBioProps> = ({ onBookCl
                 <img
                   src={drGreenScrubs}
                   alt="Dr. Shumaila Khan - DIP. Derm from Wales, Cardiff, UK & AAAM Wales"
-                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                  onLoad={() => setIsImgLoaded(true)}
+                  className={`w-full h-full object-cover object-top transition-all duration-700 filter ${
+                    isImgLoaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'
+                  }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#E5DFD4] shadow-md flex items-center justify-between text-xs">

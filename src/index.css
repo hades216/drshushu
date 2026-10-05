@@ -13,7 +13,7 @@
   }
 
   html {
-    background-color: #FFFFFF;
+    background-color: #181716;
     color: #121212;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     letter-spacing: -0.01em;
@@ -24,8 +24,14 @@
   }
 
   body {
+    background-color: #181716;
     scrollbar-width: none;
     -ms-overflow-style: none;
+  }
+
+  #root {
+    background-color: #181716;
+    min-height: 100vh;
   }
 
   /* Hide scrollbars globally */
@@ -457,5 +463,25 @@
 
 .animate-aurora-drift {
   animation: auroraDrift 16s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-gradient {
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShimmer 6s ease infinite;
 }
 

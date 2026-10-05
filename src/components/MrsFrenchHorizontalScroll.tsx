@@ -30,6 +30,7 @@ export const MrsFrenchHorizontalScroll: React.FC<MrsFrenchHorizontalScrollProps>
   const scrollWrapperRef = useRef<HTMLDivElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
 
   const cards: HorizontalCard[] = [
     {
@@ -229,22 +230,7 @@ export const MrsFrenchHorizontalScroll: React.FC<MrsFrenchHorizontalScrollProps>
       </div>
 
       {/* Header Container */}
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 w-full pt-4 pb-4 lg:py-8 flex flex-col md:flex-row md:items-end justify-between gap-4 relative z-20">
-        <div className="space-y-2.5 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[0.7rem] sm:text-xs font-bold tracking-widest text-[#FDBA74] uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-[#FDBA74]" />
-            <span>HORIZONTAL EDITORIAL SHOWCASE</span>
-          </div>
-
-          <h2 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-light text-white leading-tight">
-            Clinical Artistry &amp; Innovations
-          </h2>
-
-          <p className="text-white/80 font-normal text-xs sm:text-base leading-relaxed">
-            Scroll smoothly across our signature protocols and FDA-cleared aesthetic technologies.
-          </p>
-        </div>
-
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10 w-full pt-4 pb-4 lg:py-8 flex flex-col md:flex-row md:items-end justify-end gap-4 relative z-20">
         {/* Progress Tracker Pill & Arrows */}
         <div className="flex items-center justify-between md:justify-end gap-4">
           {/* Card Indicator Dots (Mobile) */}
@@ -337,7 +323,11 @@ export const MrsFrenchHorizontalScroll: React.FC<MrsFrenchHorizontalScrollProps>
                   <img
                     src={c.image}
                     alt={c.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    onLoad={() => setLoadedImages(prev => ({ ...prev, [c.id]: true }))}
+                    className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-700 filter ${
+                      loadedImages[c.id] ? 'blur-0 opacity-100' : 'blur-md opacity-0'
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-white/20 text-[0.7rem] sm:text-xs font-semibold text-[#FDBA74] flex items-center gap-1.5">

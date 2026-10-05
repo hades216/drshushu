@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Check, MessageSquare, MapPin } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -20,6 +20,9 @@ export const MrsFrenchAboutClinic: React.FC<MrsFrenchAboutClinicProps> = ({ onBo
   const rightTextRef = useRef<HTMLDivElement | null>(null);
   const bottomNarrativeRef = useRef<HTMLDivElement | null>(null);
   const bottomImageRef = useRef<HTMLDivElement | null>(null);
+
+  const [isImg1Loaded, setIsImg1Loaded] = useState(false);
+  const [isImg2Loaded, setIsImg2Loaded] = useState(false);
 
   const highlights = [
     {
@@ -131,7 +134,11 @@ export const MrsFrenchAboutClinic: React.FC<MrsFrenchAboutClinicProps> = ({ onBo
               <img
                 src={receptionImg}
                 alt="Dermalase Reception with Illuminated Butterfly Logo & Living Greenery Wall"
-                className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700"
+                loading="lazy"
+                onLoad={() => setIsImg1Loaded(true)}
+                className={`w-full h-full object-cover group-hover:scale-103 transition-all duration-700 filter ${
+                  isImg1Loaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-white/60 text-sm text-neutral-900 flex items-center justify-between shadow-sm">
@@ -246,7 +253,11 @@ export const MrsFrenchAboutClinic: React.FC<MrsFrenchAboutClinicProps> = ({ onBo
                 <img
                   src={loungeImg}
                   alt="Dermalase Waiting Lounge with Modern Colorful Chairs"
-                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onLoad={() => setIsImg2Loaded(true)}
+                  className={`w-full h-full object-cover transition-all duration-700 filter ${
+                    isImg2Loaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'
+                  }`}
                 />
               </div>
             </div>

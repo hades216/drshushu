@@ -13,6 +13,7 @@ export const MrsFrenchHero: React.FC<MrsFrenchHeroProps> = ({
   onWelcomeClick,
 }) => {
   const [scrollY, setScrollY] = useState(0);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const heroContainerRef = useRef<HTMLDivElement | null>(null);
   const headingWordRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -111,7 +112,13 @@ export const MrsFrenchHero: React.FC<MrsFrenchHeroProps> = ({
         <img
           src={heroBg}
           alt="Dermalase Aesthetic Clinic - Dr. Shumaila Khan"
-          className="w-full h-full object-cover object-[center_28%] filter brightness-95"
+          loading="eager"
+          // @ts-ignore
+          fetchPriority="high"
+          onLoad={() => setIsImageLoaded(true)}
+          className={`w-full h-full object-cover object-[center_28%] filter brightness-95 transition-opacity duration-700 ${
+            isImageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         />
         {/* Cinematic gradient overlays with specular depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-black/80" />
@@ -141,23 +148,16 @@ export const MrsFrenchHero: React.FC<MrsFrenchHeroProps> = ({
       >
 
         {/* Headline with Word-by-Word 3D Stagger Reveal */}
-        <h1 className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-normal leading-[1.08] tracking-[0.04em] text-white uppercase drop-shadow-[0_4px_22px_rgba(0,0,0,0.6)] flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <h1 className="font-serif-luxury text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-normal leading-[1.08] tracking-[0.04em] uppercase drop-shadow-[0_4px_22px_rgba(0,0,0,0.6)] flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
           {headingWords.map((word, idx) => (
             <span
               key={idx}
               ref={(el) => {
                 headingWordRefs.current[idx] = el;
               }}
-              className="inline-block will-change-transform"
+              className="inline-block will-change-transform text-transparent bg-clip-text bg-gradient-to-r from-white via-[#FDBA74] to-[#E45D25] animate-text-gradient"
             >
-              {word === 'BEAUTY' ? (
-                <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-white via-[#FDE8D7] to-[#FDBA74]">
-                  {word}
-                  <span className="absolute bottom-1 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#FDBA74] to-transparent animate-pulse" />
-                </span>
-              ) : (
-                word
-              )}
+              {word}
             </span>
           ))}
         </h1>
@@ -165,7 +165,7 @@ export const MrsFrenchHero: React.FC<MrsFrenchHeroProps> = ({
         {/* Subtitle in Crisp Tracked Sans-Serif with Letter Spacing Transition */}
         <p
           ref={subtitleRef}
-          className="text-xs sm:text-sm md:text-base font-sans font-light tracking-[0.24em] text-white/90 uppercase max-w-xl mx-auto drop-shadow-sm will-change-transform"
+          className="text-xs sm:text-sm md:text-base font-sans font-light tracking-[0.24em] text-transparent bg-clip-text bg-gradient-to-r from-white/90 via-[#FDBA74] to-[#E45D25] uppercase max-w-xl mx-auto drop-shadow-sm will-change-transform animate-text-gradient"
         >
           LET ME HELP BRING OUT THE BEST IN YOU
         </p>

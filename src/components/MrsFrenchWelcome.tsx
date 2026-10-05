@@ -13,6 +13,7 @@ export const MrsFrenchWelcome: React.FC<MrsFrenchWelcomeProps> = ({ onBookSucces
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,7 +138,11 @@ export const MrsFrenchWelcome: React.FC<MrsFrenchWelcomeProps> = ({ onBookSucces
                 <img
                   src={drPortrait}
                   alt="Dr. Shumaila Khan - Aesthetic Physician & Skin Specialist in Islamabad"
-                  className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-700"
+                  loading="lazy"
+                  onLoad={() => setIsImgLoaded(true)}
+                  className={`w-full h-full object-cover object-top group-hover:scale-103 transition-all duration-700 filter ${
+                    isImgLoaded ? 'blur-0 opacity-100' : 'blur-md opacity-0'
+                  }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
