@@ -1,0 +1,8 @@
+{
+  "name": "Dermalase Luxury Aesthetic Experience",
+  "description": "An immersive, world-class digital transformation of Dr. Shumaila Khan’s clinic, blending clinical excellence with premium, high-end editorial design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
